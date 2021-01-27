@@ -1,0 +1,15 @@
+class Solution {
+public:
+    string reverseOnlyLetters(string S) {
+        string s = S;
+        int i = 0, j = (int)S.size() - 1;
+        while (i < j) {
+            while (!isalpha(s[i]) && i<S.size() - 1) { ++i; }
+            while (!isalpha(s[j]) && j>0) { --j; }
+            if (i < j) {
+                swap(s[i++], s[j--]);
+            }
+        }
+        return s;
+    }
+};
