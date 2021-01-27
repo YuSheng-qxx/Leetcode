@@ -1,0 +1,24 @@
+class Solution {
+public:
+    vector<int> intersection(vector<int>& nums1, vector<int>& nums2) {
+        set<int> s;
+        set<int> s2;
+        vector<int> v;
+        for(int& e:nums1)
+        {
+            s.insert(e);
+        }
+        for(int& e:nums2)
+        {
+            s2.insert(e);
+        }
+        for(const int& e:s)
+        {
+            if(s2.count(e))
+            {
+                v.push_back(e);
+            }
+        }
+        return v;
+    }
+};
