@@ -1,0 +1,26 @@
+class Solution {
+public:
+    string addBinary(string a, string b) {
+        string str;  
+        int tmp=0;
+        int i=a.size()-1,j=b.size()-1;
+        while(i>=0 || j>=0 || tmp)
+        {
+            int res=tmp;
+            if(i>=0)
+            {
+                res+=(a[i]-'0');
+                --i;
+            }
+            if(j>=0)
+            {
+                res+=(b[j]-'0');
+                --j;
+            }
+            tmp = res/2;
+            str.push_back('0'+res%2);
+        }
+        reverse(str.begin(), str.end());
+        return str;
+    }
+};
