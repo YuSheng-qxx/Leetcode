@@ -1,0 +1,22 @@
+class Solution {
+public:
+    vector<string> buildArray(vector<int>& target, int n) {
+        vector<string> ans;
+        int pos=0;
+
+        for (int i=1; i<=n; ++i) {
+            if (i == target[pos]) {
+                ans.push_back("Push");
+                ++pos;
+            }
+            else if (i < target[pos]) {
+                ans.push_back("Push");
+                ans.push_back("Pop");
+            }
+
+            if (pos == target.size())  break;
+        }
+
+        return ans;
+    }
+};
