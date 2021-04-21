@@ -1,0 +1,16 @@
+class Solution {
+public:
+    bool isUnique(string astr) {
+        set<char> st;
+        for(int i=0; i<astr.size(); i++){
+            st.insert(astr[i]);
+        }
+        if(st.size() == astr.size()){
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+};
