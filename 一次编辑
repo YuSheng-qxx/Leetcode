@@ -1,0 +1,24 @@
+class Solution {
+public:
+    bool oneEditAway(string first, string second) {
+        int sub = first.size() - second.size();
+        if(abs(sub) > 1){
+            return false;
+        }
+        if(first.size() < second.size()){
+            return oneEditAway(second, first);
+        }
+        int edit = 0;
+        for(int i=0,j=0; i<first.size() && j<second.size(); i++, j++){
+            if(first[i] != second[j]){
+                if(sub != 0){
+                    j--;
+                }
+                if(++edit > 1){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+};
