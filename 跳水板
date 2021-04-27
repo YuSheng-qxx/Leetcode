@@ -1,0 +1,20 @@
+class Solution {
+public:
+    vector<int> divingBoard(int shorter, int longer, int k) {
+        vector<int> vt;
+        if(k == 0){
+            return vt;
+        }
+        if(shorter == longer){
+            vt.push_back(shorter * k);
+            return vt;
+        }
+        int count = shorter*k;
+        vt.push_back(count);
+        for(int i=k; i>0; i--){
+            count = count - shorter + longer;
+            vt.push_back(count);
+        }
+        return vt;
+    }
+};
