@@ -1,0 +1,11 @@
+class Solution {
+public:
+    string reverseLeftWords(string s, int n) {
+        int size = s.size();
+        if(n>s.size()){
+            n %= s.size();
+        }
+        s += s;
+        return s.substr(n, size);
+    }
+};
