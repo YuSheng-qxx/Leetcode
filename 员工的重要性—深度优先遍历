@@ -1,0 +1,29 @@
+/*
+// Definition for Employee.
+class Employee {
+public:
+    int id;
+    int importance;
+    vector<int> subordinates;
+};
+*/
+
+class Solution {
+public:
+    int DFS(map<int, Employee*>& mp, int id){
+        int cur = mp[id]->importance;
+        for(int sub:mp[id]->subordinates){
+            cur += DFS(mp, sub);
+        }
+        return cur;
+    }
+
+    int getImportance(vector<Employee*> employees, int id) {
+        map<int, Employee*> mp;
+        for(auto& cur:employees){
+            mp[cur->id] = cur;
+        }
+        return DFS(mp, id);
+    }
+};
+
