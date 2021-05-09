@@ -1,0 +1,16 @@
+class Solution {
+public:
+    int getImportance(vector<Employee*> employees, int id) {
+        int sum = 0;
+        for(int i=0; i<employees.size(); i++){
+            if(employees[i]->id == id){
+                sum += employees[i]->importance;
+                for(int j=0; j<employees[i]->subordinates.size(); j++){
+                    sum += getImportance(employees, employees[i]->subordinates[j]);
+                }
+                break;
+            }
+        }
+        return sum;
+    }
+};
