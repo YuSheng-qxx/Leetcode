@@ -43,12 +43,16 @@ public:
     }
 };
 
-/*class Solution {
+class Solution {
 public:
     vector<vector<int>> levelOrder(Node* root) {
+        vector<vector<int>> mat;
+        if(!root){
+            return mat;
+        }
         queue<Node*> q;
         q.push(root);
-        vector<vector<int>> mat;
+        
         while(!q.empty()){
             //判断当前队列中元素的个数
             int sz = q.size();
@@ -65,4 +69,4 @@ public:
         }
         return mat;
     }
-};*/
+};
