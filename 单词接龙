@@ -1,0 +1,42 @@
+class Solution {
+public:
+    int ladderLength(string beginWord, string endWord, vector<string>& wordList) {
+        queue<string> q;
+        q.push(beginWord);
+        //标记搜索过的单词
+        set<string> visited;
+        visited.insert(beginWord);
+
+        set<string> dict;
+        for(string wd:wordList){
+            dict.insert(wd);
+        }
+
+        int step = 1;
+        while(!q.empty()){
+            //获取上一次转换之后的单词个数
+            int num = q.size();
+            while(num--){
+                string cur = q.front();
+                q.pop();
+                if(cur == endWord){
+                    return step;
+                }
+                //修改一个位置的字符
+                for(int i=0; i<cur.size(); i++){
+                    string sb = cur;
+                    for(char ch='a'; ch<='z'; ch++){
+                        sb[i] = ch;
+                        //判断修改后的单词是否在词典中且没有搜索过
+                        if(dict.find(sb) != dict.end() && !(visited.find(sb) != visited.end())){
+                            q.push(sb);
+                            visited.insert(sb);
+                        }
+                    }
+                } 
+            }
+            ++step;
+        }
+        return 0;
+    }
+};
