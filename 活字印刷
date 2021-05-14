@@ -1,0 +1,22 @@
+class Solution {
+public:
+    void DFS(string& tiles, vector<int>& visited, string cur, unordered_set<string>& all){
+        for(int i=0; i<tiles.size(); i++){
+            if(!cur.empty()){
+                all.insert(cur);
+            }
+            if(visited[i] == 0){
+                visited[i] = 1;
+                DFS(tiles, visited, cur+tiles[i], all);
+                visited[i] = 0;
+            }
+            
+        }
+    }
+    int numTilePossibilities(string tiles) {
+        unordered_set<string> all;
+        vector<int> visited(tiles.size(), 0);
+        DFS(tiles, visited, "", all);
+        return all.size();
+    }
+};
