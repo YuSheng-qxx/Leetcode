@@ -1,0 +1,25 @@
+class Solution {
+public:
+    void dfs(vector<int>& candidates, int target, vector<vector<int>>& ans, vector<int>& combine, int sum, int idx) {
+        if(sum >= target){
+            if(sum == target){
+                vector<int> copy(combine);
+                ans.push_back(copy);
+            }
+            return ;
+        }
+        for(int i=idx; i<candidates.size(); i++){
+            combine.push_back(candidates[i]);
+            dfs(candidates, target, ans, combine, sum + candidates[i], i);
+            //回溯
+            combine.erase(combine.end()-1);
+        }
+    }
+
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+        vector<vector<int>> ans;
+        vector<int> combine;
+        dfs(candidates, target, ans, combine, 0, 0);
+        return ans;
+    }
+};
