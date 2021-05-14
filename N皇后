@@ -1,0 +1,50 @@
+class Solution {
+public:
+    void DFS(vector<vector<pair<int, int>>>& all, vector<pair<int, int>>& cur, int row, int n){
+        if(row == n){
+            //每一行都确定了一个皇后，一种方案产生
+            all.push_back(cur);
+            return ;
+        }
+        for(int i=0; i<n; i++){
+            if(isValid(row, i, cur)){
+                //确定当前行皇后位置
+                cur.push_back(make_pair(row, i));
+                //确定下一行皇后位置
+                DFS(all, cur, row+1, n);
+                //回溯，尝试当前行其他位置
+                cur.pop_back();
+            }
+        }
+    }
+
+    bool isValid(int row, int col, vector<pair<int, int>>& cur){
+        //判断（row, col）是否和已确定的位置冲突
+        for(pair<int, int> pos:cur){
+            if(col == pos.second || row+col == pos.first+pos.second || row-col == pos.first-pos.second){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    vector<vector<string>> trans(vector<vector<pair<int, int>>>& all, int n){
+        vector<vector<string>> final;
+        for(vector<pair<int, int>>& cur:all){
+            vector<string> str(n, string(n, '.'));
+            for(pair<int, int>& pos:cur){
+                str[pos.first][pos.second] = 'Q';
+            }
+            final.push_back(str);
+        }
+        return final;
+    }
+
+    vector<vector<string>> solveNQueens(int n) {
+        vector<vector<string>> final;
+        vector<vector<pair<int, int>>> all;
+        vector<pair<int, int>> cur;
+        DFS(all, cur, 0, n);
+        return trans(all, n);
+    }
+};
