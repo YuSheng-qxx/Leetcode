@@ -1,0 +1,27 @@
+class Solution {
+public:
+    void DFS(vector<int>& candidates, int target, set<vector<int>>& ret, vector<int>& tmp, int idx){
+        if(target < 0){
+            return ;
+        }
+        if(target == 0){
+            ret.insert(tmp);
+            return;
+        }
+        for(int i=idx; i<candidates.size(); i++){
+            if(i>idx && candidates[i] == candidates[i-1]){
+                continue;
+            }
+            tmp.push_back(candidates[i]);
+            DFS(candidates, target-candidates[i], ret, tmp, i+1);
+            tmp.pop_back();
+        }
+    }
+    vector<vector<int>> combinationSum2(vector<int>& candidates, int target) {
+        sort(candidates.begin(), candidates.end());
+        set<vector<int>> ret;
+        vector<int> tmp;
+        DFS(candidates, target, ret, tmp, 0);
+        return vector<vector<int>>(ret.begin(), ret.end());
+    }
+};
