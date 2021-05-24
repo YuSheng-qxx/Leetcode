@@ -1,0 +1,23 @@
+class Solution {
+public:
+    void DFS(vector<int>& nums, set<vector<int>>& ret, vector<int>& tmp, int i){
+        if(tmp.size() >= 2){
+            ret.insert(tmp);
+        }
+        for(int j=i; j<nums.size(); j++){
+            int sz = tmp.size();
+            if(!tmp.empty() && tmp[sz-1] > nums[j]){
+                continue;
+            }
+            tmp.push_back(nums[j]);
+            DFS(nums, ret, tmp, j+1);
+            tmp.pop_back();
+        }
+    }
+    vector<vector<int>> findSubsequences(vector<int>& nums) {
+        set<vector<int>> ret;
+        vector<int> tmp;
+        DFS(nums, ret, tmp, 0);
+        return vector<vector<int>>(ret.begin(), ret.end());
+    }
+};
