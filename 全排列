@@ -1,0 +1,26 @@
+class Solution {
+public:
+    void DFS(vector<int>& nums, vector<vector<int>>& mat, vector<int>& tmp, vector<int>& visited, int idx){
+        if(tmp.size() == nums.size()){
+            mat.push_back(tmp);
+            return ;
+        }
+        for(int i=0; i<nums.size(); i++){
+            if(visited[i] != 0){
+                continue;
+            }
+            tmp.push_back(nums[i]);
+            visited[i] = 1;
+            DFS(nums, mat, tmp, visited, i+1);
+            tmp.pop_back();
+            visited[i] = 0;
+        }
+    }
+    vector<vector<int>> permute(vector<int>& nums) {
+        vector<vector<int>> mat;
+        vector<int> tmp;
+        vector<int> visited(nums.size(), 0);
+        DFS(nums, mat, tmp, visited, 0);
+        return mat;
+    }
+};
