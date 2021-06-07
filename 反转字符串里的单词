@@ -1,0 +1,21 @@
+class Solution {
+public:
+    string reverseWords(string s) {
+        int index=s.size()-1;//从最后一个字符开始遍历
+        string res="";
+        while(index>=0){
+            int cnt=0;//每个单词的字符个数
+            while(index>=0&&s[index]==' '){//遇到空格继续向左扫描
+                index--;
+            }
+            while(index>=0&&s[index]!=' '){//遇到非空格字符，统计字符个数同时index--
+                index--;
+                cnt++;//单词字符个数
+            }
+            if(cnt){//存在单词
+                res+=s.substr(index+1,cnt)+" ";//每个单词后面加空格
+            }
+        }
+        return res.substr(0,res.size()-1);//减掉最后一个单词的最后一个空格字符
+    }
+};
